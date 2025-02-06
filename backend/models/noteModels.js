@@ -2,6 +2,11 @@ import mongoose from 'mongoose';
 
 //creating a schema of the MongoDB, schema is a blueprint that defines how our document is structured in the database. 
 const noteSchema = mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true, 
+        ref: 'User'
+    },
     title: {
         type: String,
         required: true
