@@ -15,7 +15,7 @@ export const createNotes = expressAsyncHandler(async (req, res) => {
         res.status(400)
         throw new Error('Plese include title and the content for the note')
     }
-    const newNote = await Note.create({
+    const newNote = await Note.create({ //this creates the new field in the database 
         title: req.body.title,
         content: req.body.content
     }); 
