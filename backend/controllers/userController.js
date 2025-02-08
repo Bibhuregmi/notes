@@ -65,7 +65,12 @@ export const loginUser = expressAsyncHandler(async (req, res) => {
 // @desc GET info of the current logged in user
 // @route GET api/users/me
 export const getUser =  expressAsyncHandler(async (req, res) => {
-    res.status(200).json({message : 'Loggedin user'})
+    const {id, name, email} = await User.findById(req.user.id)
+    res.status(200).json({
+        id: req.user.id,
+        name,
+        email
+    })
 })
 
 

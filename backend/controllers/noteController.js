@@ -1,10 +1,13 @@
 import expressAsyncHandler from "express-async-handler" //using this so that we can keep code modular and no need to use try catch block and next to handle error
 import { Note } from "../models/noteModels.js"
+import User from "../models/userModel.js"
 // @desc : GET all the notes of the user
 // @route : GET api/notes
 export const getNotes = expressAsyncHandler(async (req, res) => {
-    const note = await Note.find(); 
-    res.status(200).json(note)
+    console.log('Fetching notes for user ID:', req.user.id);
+    const userNotes = await User.find({ user: req.user.id })
+    console.log('Notes found:', userNotes);
+    res.status(200).json(userNotes)
 })
 // @desc : Create new note for the user
 // @route : POST api/notes
@@ -16,8 +19,9 @@ export const createNotes = expressAsyncHandler(async (req, res) => {
         throw new Error('Plese include title and the content for the note')
     }
     const newNote = await Note.create({ //this creates the new field in the database 
-        title: req.body.title,
-        content: req.body.content
+        user: req.user.id,
+        title,
+        content,
     }); 
     
     res.status(200).json(newNote);
