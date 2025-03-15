@@ -1,0 +1,8 @@
+@import "tailwindcss"; 
+@import "@fontsource/ubuntu";
+
+@layer base{
+    :root{
+       font-family: 'Ubuntu', sans-serif;
+    }
+}

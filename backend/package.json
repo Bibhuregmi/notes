@@ -5,11 +5,11 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node --watch backend/server.js"
+    "start": "node --watch backend/server.js",
+    "frontend": "cd frontend && npm run dev"
   },
   "author": "Bibhushit Regmi",
-  "license": "MIT",
-  "dependencies": {
+  "license": "MIT",  "dependencies": {
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",

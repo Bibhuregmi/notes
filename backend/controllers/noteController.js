@@ -5,7 +5,7 @@ import User from "../models/userModel.js"
 // @route : GET api/notes
 export const getNotes = expressAsyncHandler(async (req, res) => {
     console.log('Fetching notes for user ID:', req.user.id);
-    const userNotes = await User.find({ user: req.user.id })
+    const userNotes = await Note.find({ user: req.user.id })
     console.log('Notes found:', userNotes);
     res.status(200).json(userNotes)
 })
