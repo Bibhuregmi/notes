@@ -26,16 +26,35 @@ const Register = () => {
     setFormData({...formData, [e.target.name] : e.target.value})
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationErrors = validateform(formData);
-    setErrors(validationErrors); 
+    try{
+      const validationErrors = validateform(formData);
+      setErrors(validationErrors); 
 
-    if(Object.keys(validationErrors).length === 0){
-      console.log('Form submitted sucessfully', formData); 
-      navigatetoLogin();
-      //TODO: Logic for the API call 
-    }
+      if(Object.keys(validationErrors).length === 0){
+        console.log('Form submitted sucessfully', formData);
+        const res = await fetch("http://localhost:8000/api/users/", {
+          method: 'POST', 
+          headers: {
+            'Content-Type' : 'application/json',
+          },
+          body: JSON.stringify(formData),  //sending the form data in the form of body
+        });
+        if(!res.ok){
+          const errorData = await res.json();
+          throw new Error (errorData.message || "Registration failed");
+        }
+        const data = await res.json();
+        localStorage.setItem('authToken', data.token);
+        console.log(data);
+        navigatetoLogin();
+      }
+      }catch(error){
+        console.error(error.message || 'Something went wrong');
+      }
+      
+    
   }
   return (
     <div className = 'mx-4 my-4 w-[80vwh] h-[90vh] flex  justify-center px-2 py-2'>
