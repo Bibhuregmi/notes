@@ -46,7 +46,6 @@ const Register = () => {
           throw new Error (errorData.message || "Registration failed");
         }
         const data = await res.json();
-        localStorage.setItem('authToken', data.token);
         console.log(data);
         navigatetoLogin();
       }
