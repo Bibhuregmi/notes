@@ -1,12 +1,14 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {FaEnvelope, FaLock} from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'; 
+import { AuthContext } from '../context/AuthContext';
 const Login = () => {
 
   const[email, setEmail] = useState('');
   const[password, setPassword] = useState('');
   const[error, setError] = useState(''); 
   const navigate = useNavigate(); 
+  const { login }= useContext(AuthContext)
 
   const userData = {email, password}; 
   const handleSubmit = async (e) => {
@@ -24,15 +26,15 @@ const Login = () => {
         throw new Error( data.error || 'Login Failed')
       }
 
-      localStorage.setItem('authToken', data.token) //storing the JWT token in the local storage of the browser to authenticate the user.
+      login(data.token);
       navigate('/')
     } catch (error) {
       setError(error.message);
     }
   }
   return (
-      <div className = 'mx-4 my-4 w-[80vwh] h-[85vh] flex  justify-center px-2 py-2'>
-        <div className = 'h-full max-w-1/2 border-2 rounded-lg shadow-lg bg-[#121212] text-white px-6 py-6'>
+      <div className = 'mx-4 my-4 h-[85vh] flex  justify-center px-2 py-2'>
+        <div className = 'lg:h-full lg:max-w-1/2 border-2 rounded-lg shadow-lg bg-[#121212] text-white px-6 py-6 sm:w-full sm:h-auto'>
           <div className = 'text-center max-w-full mb-14'>
             <h3 className='sm:text-2xl md:text-4xl lg:text-6xl font-bold'>Welcome to Note.</h3>
             <p className='sm:text-sm md:text-lg lg:text-xl font-light'>Login to your account</p>
