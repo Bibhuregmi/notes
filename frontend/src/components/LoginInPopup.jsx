@@ -1,5 +1,5 @@
 import React from 'react'
-const LoginPopup = ({show, onClose, onLogout}) => {
+const LoginPopup = ({show, onLogout, onClose}) => {
     
     if(!show) return null;
 
