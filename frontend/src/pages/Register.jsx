@@ -56,8 +56,8 @@ const Register = () => {
     
   }
   return (
-    <div className = 'mx-4 my-4 w-[80vwh] h-[90vh] flex  justify-center px-2 py-2'>
-        <div className = 'lg:h-full lg:max-w-1/2 sm:max-w-full sm:max-h-auto border-2 rounded-lg shadow-lg bg-[#121212] text-white px-6 py-6'>
+    <div className = 'mx-4 my-4 h-[85vh] flex  justify-center px-2 py-2'>
+        <div className = 'lg:h-full lg:max-w-1/2 border-2 rounded-lg shadow-lg bg-[#121212] text-white px-6 py-6 sm:w-full sm:h-auto'>
           <div className = 'text-center max-w-full mb-14'>
             <h3 className='sm:text-2xl md:text-4xl lg:text-6xl font-bold'>Welcome to Note.</h3>
             <p className='sm:text-sm md:text-lg lg:text-xl font-light'>Create a new Account</p>
