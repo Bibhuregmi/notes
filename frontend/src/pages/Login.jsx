@@ -23,7 +23,7 @@ const Login = () => {
       const data = await res.json(); 
       console.log(data);
       if(!res.ok){
-        throw new Error( data.error || 'Login Failed')
+        throw new Error( data.error || 'Invalid Email or Password')
       }
 
       login(data.token);
@@ -38,7 +38,7 @@ const Login = () => {
           <div className = 'text-center max-w-full mb-14'>
             <h3 className='sm:text-2xl md:text-4xl lg:text-6xl font-bold'>Welcome to Note.</h3>
             <p className='sm:text-sm md:text-lg lg:text-xl font-light'>Login to your account</p>
-            {error && <p className="text-red-500 text-sm mb-2">{error}</p>} {/*Showing the error message if there is any*/}
+            
           </div>
             <form onSubmit={handleSubmit}>
               <div className='relative mb-10'>
@@ -66,6 +66,7 @@ const Login = () => {
                   ></input>
                 <FaLock className='absolute left-3 top-1/2 transform -translate-y-1/2 text-black'/>
               </div>
+                {error && <p className="text-red-500 text-base mb-2 text-center font-bold">{error}</p>} {/*Showing the error message if there is any*/}
               <div className='flex w-full justify-center border-b-1 py-3 mb-2'>
                 <button className='border-2 w-1/2 border-white mb-2 rounded-lg px-2 py-2 justify-center hover:bg-white hover:text-black cursor-pointer'>
                     Sign In
