@@ -33,7 +33,29 @@ try {
     if(!res.ok){
         console.error(`Error on Http, ${res.status}`)
     }
+    return data; 
     }catch (error) {
     console.error('Error fetching notes', error)
+    return null; 
+    }
+}
+
+export const deleteNotes = async (noteId) => {
+    try{
+        const res = await fetch(`http://localhost:8000/api/notes/${noteId}`, {
+            method: 'DELETE', 
+            headers: {
+                'Content-Type' : 'application/json', 
+                'Authorization' : `Bearer ${token}`
+            },
+        })
+        const data = await res.json();
+        if(!res.ok){
+            console.error(`Error while delete ${res.status}`)
+            return null;
+        }
+        return data; 
+    }catch (error){
+        console.error('Error deleteing notes', error)
     }
 }
