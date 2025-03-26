@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { FaEnvelope, FaLock, FaUser } from 'react-icons/fa';
 import { validateform } from '../utils/validation';
 import { useNavigate } from 'react-router-dom';
