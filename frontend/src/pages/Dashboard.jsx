@@ -22,10 +22,10 @@ const Dashboard = () => {
       loadData(); 
     } 
   }, [isAuthenticated, token]) //anytime the state of the authentication or the token changes, the useEffect runs again. 
+  console.log(isAuthenticated, token)
 
-  return (
-    <>
-    {!isAuthenticated && (
+  if(!isAuthenticated){
+    return(
       <div className="max-w-full h-[50vh] flex flex-col items-center gap-4 mt-4 px-4 py-4">
         <h1 className="text-8xl font-bold mb-10">Welcome to Notes.</h1>
         <p className="text-lg italic">
@@ -33,9 +33,10 @@ const Dashboard = () => {
         </p>
         <h3>Sign In with your existing account or Register to create new Account.</h3>
       </div>
-    )}
-  
-    {isAuthenticated && (
+    )
+  }
+
+  return (
       <>
         <div className="sm:text-2xl md:text-6xl lg:text-8xl text-center mt-10 mb-10 h-[60vh] flex flex-col justify-center items-center bg-black text-white">
           Welcome to Notes <br />
@@ -79,8 +80,6 @@ const Dashboard = () => {
             </div>
           </>
       </>
-    )}
-  </>
   )
 }
 
