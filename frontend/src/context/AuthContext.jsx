@@ -5,8 +5,7 @@ export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     //checking for the authtoken upon the component mount
     useEffect(() => {
-        const token = localStorage.getItem('authToken'); 
-        setIsAuthenticated(!!token);
+        setIsAuthenticated(!!localStorage.getItem('authToken')) //setting auth state to either true or false based on the presence of token in the local storage
     }, [])
     
     //login method
@@ -17,7 +16,6 @@ export const AuthProvider = ({ children }) => {
 
     //logout method
     const logout = () => {
-        console.log('Logout function called')
         localStorage.removeItem("authToken"); 
         setIsAuthenticated(false); 
     }
