@@ -39,8 +39,8 @@ export const updateNotes = expressAsyncHandler(async (req, res) => {
         throw new Error('Invalid Id!')
     }
     const updatedNote = await Note.findByIdAndUpdate(id,
-                                                    {title: newTitle,
-                                                    content: newContent}, {new : true} ) 
+        {title: newTitle,
+        content: newContent}, {new : true} ) 
     console.log(req.body);
     res.status(200).json(updatedNote)
 })
