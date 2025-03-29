@@ -8,7 +8,7 @@ router.get('/', protect, getNotes);
 //post request
 router.post('/', protect, createNotes);
 //put request
-router.put('/:id', protect, updateNotes);
+router.patch('/:id', protect, updateNotes);
 //delete request
 router.delete('/:id', protect, deleteNotes);
 
