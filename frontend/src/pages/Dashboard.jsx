@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { AuthContext } from '../context/AuthContext';
 import { getUserName, fetchNotes, deleteNotes } from '../utils/apiCalls';
 import {FaPencilAlt, FaTrash} from 'react-icons/fa'
-
+import { useNavigate } from'react-router-dom'
 const Dashboard = () => {
 
   const[notes, setNotes] = useState([]); 
@@ -11,6 +11,25 @@ const Dashboard = () => {
   const {isAuthenticated, token } = useContext(AuthContext)
   
   const message = notes.length <= 0 ? 'No notes availabe! Create new' : 'All notes'
+
+  const navigation = useNavigate()
+
+  const formatDate = (isoString) => {
+    const date = new Date(isoString); 
+    return date.toLocaleDateString('en-US', {
+      month: 'short', 
+      day: 'numeric', 
+      year: 'numeric'
+    }) + " at " + date.toLocaleTimeString('en-US', {
+      hour: 'numeric', 
+      minute: '2-digit',
+      hour12: false
+    })
+  }
+
+  const handleEditNote = (note) => {
+    navigation('/edit-notes', { state : { note }})
+  }
   useEffect (() => { 
     if(isAuthenticated){
       const loadData = async () => {
@@ -56,14 +75,16 @@ const Dashboard = () => {
               {notes.map((note) => (
                 <div
                   key={note._id}
-                  className="px-4 py-4 rounded-lg h-[350px] w-[75%] bg-yellow-200 hover:scale-105 shadow-lg mt-4"
+                  className="px-4 py-4 rounded-lg h-[350px] w-[75%] bg-yellow-200 hover:scale-105 shadow-lg mt-4 cursor-pointer text-left"
+                  onClick={() => {handleEditNote()}}
                 >
-                  <div className="flex flex-col h-full justify-between">
+                  <div className="flex flex-col h-full">
                     <div className="h-[80%] overflow-hidden">
                       <h3 className="text-5xl font-bold mb-6">{note.title}</h3>
-                      <p>{note.content}</p>
+                      <p>{note.content.length > 100 ? `${note.content.slice(0,100)}...` : note.content}</p>
                     </div>
-                    <div className="flex justify-end">
+                    <div className="flex justify-between items-center">
+                      <p className='text-xs text-gray-700 font-bold'>{formatDate(note.createdAt)}</p>
                       <button
                         className="px-4 py-4 hover:bg-red-500 hover:text-white rounded-lg hover:shadow-xl cursor-pointer"
                         onClick={async () => {
