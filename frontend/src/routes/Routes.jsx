@@ -5,6 +5,7 @@ import Login from '../pages/Login'
 import Register from '../pages/Register'
 import Header from '../layout/Header'
 import NotFound from '../pages/NotFound'
+import EditNote from '../pages/EditNote'
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -12,6 +13,7 @@ const router = createBrowserRouter(
             <Route index element = {<Dashboard/>}/>
             <Route path='/login' element = {<Login/>}/>
             <Route path='/register' element = {<Register/>}/>
+            <Route path='/edit-notes' element = {<EditNote/>}/>
             <Route path='*' element = {<NotFound/>} />
         </Route>    
     )
