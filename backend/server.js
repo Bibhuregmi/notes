@@ -13,7 +13,7 @@ connectDb();
 //this will allow all origins to make request to the backend server
 app.use(cors({
     origin: 'http://localhost:5000', //url of the frontend server
-    methods: ['POST', 'GET', 'PUT', 'DELETE']
+    methods: ['POST', 'GET', 'PUT', 'PATCH', 'DELETE']
 }));
 //using the middleware that parses the input body request
 app.use(express.json())
