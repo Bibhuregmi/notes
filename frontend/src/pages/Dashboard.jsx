@@ -3,6 +3,7 @@ import { AuthContext } from '../context/AuthContext';
 import { getUserName, fetchNotes, deleteNotes } from '../utils/apiCalls';
 import {FaPencilAlt, FaTrash} from 'react-icons/fa'
 import { useNavigate } from'react-router-dom'
+import { formatDate } from '../utils/miscMethods';
 const Dashboard = () => {
 
   const[notes, setNotes] = useState([]); 
@@ -14,21 +15,8 @@ const Dashboard = () => {
 
   const navigation = useNavigate()
 
-  const formatDate = (isoString) => {
-    const date = new Date(isoString); 
-    return date.toLocaleDateString('en-US', {
-      month: 'short', 
-      day: 'numeric', 
-      year: 'numeric'
-    }) + " at " + date.toLocaleTimeString('en-US', {
-      hour: 'numeric', 
-      minute: '2-digit',
-      hour12: false
-    })
-  }
-
   const handleEditNote = (note) => {
-    navigation('/edit-notes', { state : { note }})
+    navigation('/edit-notes', { state : { data: note }})
   }
   useEffect (() => { 
     if(isAuthenticated){
@@ -62,7 +50,7 @@ const Dashboard = () => {
           <span className="font-semibold">{userName}</span>
         </div>
         <div className="w-full h-full mt-15 px-4 py-4 justify-center flex flex-col items-center">
-          <button className="px-4 py-4 border-2 mb-10 mt-6 text-2xl hover:bg-black hover:text-white rounded-lg sm:w-1 md:w-1/2 lg:w-1/3 cursor-pointer">
+          <button className="px-4 py-4 border-2 mb-10 mt-6 text-2xl hover:bg-black hover:text-white rounded-lg cursor-pointer">
             <div className="flex items-center justify-center gap-3 sm:text-base md:text-xl lg:text-3xl">
               <FaPencilAlt />
               Create new Note
@@ -76,7 +64,7 @@ const Dashboard = () => {
                 <div
                   key={note._id}
                   className="px-4 py-4 rounded-lg h-[350px] w-[75%] bg-yellow-200 hover:scale-105 shadow-lg mt-4 cursor-pointer text-left"
-                  onClick={() => {handleEditNote()}}
+                  onClick={() => {handleEditNote(note)}}
                 >
                   <div className="flex flex-col h-full">
                     <div className="h-[80%] overflow-hidden">
