@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { AuthContext } from '../context/AuthContext';
-import { getUserName, fetchNotes, deleteNotes } from '../utils/apiCalls';
-import {FaPencilAlt, FaTrash} from 'react-icons/fa'
+import { getUserName, fetchNotes } from '../utils/apiCalls';
+import {FaPencilAlt} from 'react-icons/fa'
 import { useNavigate } from'react-router-dom'
 import { formatDate } from '../utils/miscMethods';
 const Dashboard = () => {
@@ -17,6 +17,10 @@ const Dashboard = () => {
 
   const handleEditNote = (note) => {
     navigation('/edit-notes', { state : { data: note }})
+  }
+
+  const navigatetoCreate = () => {
+    navigation('/create-notes')
   }
   useEffect (() => { 
     if(isAuthenticated){
@@ -50,7 +54,9 @@ const Dashboard = () => {
           <span className="font-semibold">{userName}</span>
         </div>
         <div className="w-full h-full mt-15 px-4 py-4 justify-center flex flex-col items-center">
-          <button className="px-4 py-4 border-2 mb-10 mt-6 text-2xl hover:bg-black hover:text-white rounded-lg cursor-pointer">
+          <button className="px-4 py-4 border-2 mb-10 mt-6 text-2xl hover:bg-black hover:text-white rounded-lg cursor-pointer"
+              onClick={() => navigatetoCreate()}
+          >
             <div className="flex items-center justify-center gap-3 sm:text-base md:text-xl lg:text-3xl">
               <FaPencilAlt />
               Create new Note
@@ -66,23 +72,12 @@ const Dashboard = () => {
                   className="px-4 py-4 rounded-lg h-[350px] w-[75%] bg-yellow-200 hover:scale-105 shadow-lg mt-4 cursor-pointer text-left"
                   onClick={() => {handleEditNote(note)}}
                 >
-                  <div className="flex flex-col h-full">
+                  <div className="flex flex-col h-full justify-between">
                     <div className="h-[80%] overflow-hidden">
-                      <h3 className="text-5xl font-bold mb-6">{note.title}</h3>
+                      <h3 className="text-5xl font-bold mb-6">{note.content.length > 30 ? `${note.content.slice(0,30)}...` : note.content}</h3>
                       <p>{note.content.length > 100 ? `${note.content.slice(0,100)}...` : note.content}</p>
                     </div>
-                    <div className="flex justify-between items-center">
                       <p className='text-xs text-gray-700 font-bold'>{formatDate(note.createdAt)}</p>
-                      <button
-                        className="px-4 py-4 hover:bg-red-500 hover:text-white rounded-lg hover:shadow-xl cursor-pointer"
-                        onClick={async () => {
-                          await deleteNotes(note._id);
-                          setNotes((prev) => prev.filter(({ _id }) => _id !== note._id));
-                        }}
-                      >
-                        <FaTrash className="text-xl" />
-                      </button>
-                    </div>
                   </div>
                 </div>
               ))}
