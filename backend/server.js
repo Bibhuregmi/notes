@@ -5,7 +5,7 @@ import { connectDb } from './config/db.js';
 import routes from './routes/noteRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import cors from 'cors';
-const port = process.env.PORT
+let port = process.env.PORT
 const app = express(); 
 
 connectDb(); 
@@ -24,6 +24,10 @@ app.use("/api/notes", routes);
 app.use('/api/users', userRoutes); 
 //using the custom error handler 
 app.use(errorHandler);
+
+if(port === null || port === ''){
+    port = 8000
+}
 
 app.listen(port, () => {
     console.log(`Server is running in ${port}`);
