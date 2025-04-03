@@ -1,12 +1,13 @@
 import React,  {useState} from 'react'
-import { useLocation } from 'react-router-dom'
-import { getToken } from '../utils/apiCalls';
+import { useLocation, useNavigate } from 'react-router-dom'
+import { getToken, deleteNotes } from '../utils/apiCalls';
 import { formatDate } from '../utils/miscMethods';
 const EditNote = () => {
     const token = getToken();
     const location = useLocation(); 
     const [note] = useState(location.state.data)
     const [editedNote, setEditedNote] = useState(note); 
+    const navigate = useNavigate();
 
     const handelContentChange = (event) => {
         const field = event.target.getAttribute('data-field'); 
@@ -18,12 +19,9 @@ const EditNote = () => {
             setEditedNote(prevNote => ({...prevNote, content: newContent}))
         }
 
-        console.log(`New ${field} changed: `, newContent)
-        console.log('Initial editedNote state:', editedNote);
     }
     console.log('Notes id: ', note._id)
     const handleSave = async () => {
-        console.log('editedNote state before save:', editedNote);
         try {
             const res = await fetch(`http://localhost:8000/api/notes/${note._id}`, {
                 method : 'PATCH', 
@@ -39,6 +37,9 @@ const EditNote = () => {
         } catch (error) {
             console.error('Error on the patch method', error)
         }
+    }
+    const navigatetoHome = () => {
+        navigate('/')
     }
   return (
 
@@ -64,12 +65,21 @@ const EditNote = () => {
               {note.content}
           </div>
       </div>
-      <div className='flex justify-center mb-10'>
+      <div className='flex justify-center mb-10 gap-4'>
             <button
-            className='min-w-1/2 border-2 hover:bg-black hover:text-white px-4 py-4 text-center mt-10 rounded-lg cursor-pointer'
+            className='min-w-1/3 border-2 hover:bg-green-700 hover:text-white px-4 py-4 text-center mt-10 rounded-lg cursor-pointer'
             onClick={handleSave}
             >
                 Save
+            </button>
+            <button
+                className="min-w-1/3 border-2 hover:bg-red-700 hover:text-white px-4 py-4 text-center mt-10 rounded-lg cursor-pointer"
+                onClick={async () => {
+                    await deleteNotes(note._id);
+                    navigatetoHome();
+                }}
+                >
+                Delete
             </button>
         </div>
     </>
