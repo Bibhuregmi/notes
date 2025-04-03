@@ -6,6 +6,7 @@ import Register from '../pages/Register'
 import Header from '../layout/Header'
 import NotFound from '../pages/NotFound'
 import EditNote from '../pages/EditNote'
+import CreateNote from '../pages/CreateNote'
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -14,6 +15,7 @@ const router = createBrowserRouter(
             <Route path='/login' element = {<Login/>}/>
             <Route path='/register' element = {<Register/>}/>
             <Route path='/edit-notes' element = {<EditNote/>}/>
+            <Route path='/create-notes' element = {<CreateNote/>}/>
             <Route path='*' element = {<NotFound/>} />
         </Route>    
     )
