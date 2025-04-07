@@ -5,7 +5,7 @@ export const getToken = () => {
 export const getUserName = async () => {
     const token = getToken(); 
     try {
-        const res = await fetch("http://localhost:8000/api/users/me", {
+        const res = await fetch("/api/users/me", {
             method: 'GET', 
             headers: {
             'Content-Type' : 'application/json',
@@ -25,7 +25,7 @@ export const getUserName = async () => {
 export const fetchNotes = async () => {
     const token = getToken(); 
     try {
-        const res = await fetch("http://localhost:8000/api/notes", {
+        const res = await fetch("/api/notes", {
             method: 'GET', 
             headers: {
             'Content-type' : 'application/json',
@@ -47,7 +47,7 @@ export const fetchNotes = async () => {
 export const deleteNotes = async (noteId) => {
     const token = getToken();
     try{
-        const res = await fetch(`http://localhost:8000/api/notes/${noteId}`, {
+        const res = await fetch(`/api/notes/${noteId}`, {
             method: 'DELETE', 
             headers: {
                 'Content-Type' : 'application/json', 
@@ -61,6 +61,6 @@ export const deleteNotes = async (noteId) => {
         }
         return data; 
     }catch (error){
-        console.error('Error deleteing notes', error)
+        console.error('Error deleting notes', error)
     }
 }
