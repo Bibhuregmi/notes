@@ -33,8 +33,8 @@ const Register = () => {
       setErrors(validationErrors); 
 
       if(Object.keys(validationErrors).length === 0){
-        console.log('Form submitted sucessfully', formData);
-        const res = await fetch("http://localhost:8000/api/users/", {
+        console.log('Form submitted successfully', formData);
+        const res = await fetch("/api/users/", {
           method: 'POST', 
           headers: {
             'Content-Type' : 'application/json',

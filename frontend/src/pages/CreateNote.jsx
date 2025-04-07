@@ -11,7 +11,7 @@ const CreateNote = () => {
     const navigate = useNavigate();
     const createNotes = async () => {
         try {
-            const res = await fetch(`http://localhost:8000/api/notes/`, {
+            const res = await fetch(`/api/notes/`, {
                 method: 'POST', 
                 headers : {
                     'Content-Type' :'application/json', 

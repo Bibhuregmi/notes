@@ -23,7 +23,7 @@ const EditNote = () => {
     console.log('Notes id: ', note._id)
     const handleSave = async () => {
         try {
-            const res = await fetch(`http://localhost:8000/api/notes/${note._id}`, {
+            const res = await fetch(`/api/notes/${note._id}`, {
                 method : 'PATCH', 
                 headers : {
                     'Content-Type' : 'application/json',
