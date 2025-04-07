@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "cd backend && node --watch server.js",
+    "start": "cd backend && node server.js",
     "heroku-postbuild": "cd frontend && npm install && npm run build"
   },
   "author": "Bibhushit Regmi",
