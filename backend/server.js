@@ -26,6 +26,9 @@ app.use(express.urlencoded({extended : false}))
 
 app.use("/api/notes", routes);
 app.use('/api/users', userRoutes); 
+//specifying the url and the router 
+//using the custom error handler 
+app.use(errorHandler); 
 
 //Serving the frontend 
 if(process.env.NODE_ENV === 'production'){
@@ -38,9 +41,6 @@ if(process.env.NODE_ENV === 'production'){
     app.get('/', (req,res) => res.send("Please set to production"))
 }
 
-//specifying the url and the router 
-//using the custom error handler 
-app.use(errorHandler); 
 
 if(port === null || port === ''){
     port = 8000
