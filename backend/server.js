@@ -24,6 +24,9 @@ app.use(cors({
 app.use(express.json())
 app.use(express.urlencoded({extended : false}))
 
+app.use("/api/notes", routes);
+app.use('/api/users', userRoutes); 
+
 //Serving the frontend 
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static(path.join(__dirname, '../frontend/dist')))
@@ -36,8 +39,6 @@ if(process.env.NODE_ENV === 'production'){
 }
 
 //specifying the url and the router 
-app.use("/api/notes", routes);
-app.use('/api/users', userRoutes); 
 //using the custom error handler 
 app.use(errorHandler); 
 
