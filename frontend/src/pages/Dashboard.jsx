@@ -62,7 +62,7 @@ const Dashboard = () => {
           </button>
         </div>
           <>
-            <h2 className="sm:text-base md:text-4xl lg:text-6xl mb-6 text-center">{notes.length <= 0 ? 'No notes availabe! Create new' : 'All notes'}</h2>
+            <h2 className="sm:text-base md:text-4xl lg:text-6xl mb-6 text-center">All notes</h2>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-2 px-2 py-2 h-full w-full place-items-center">
               {notes.map((note) => (
                 <div
